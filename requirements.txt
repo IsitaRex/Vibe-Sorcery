@@ -1,0 +1,5 @@
+essentia-tensorflow
+transformers
+diffusers
+numpy==1.26.4  # Numpy < 2.0 needed for Essentia
+librosa
