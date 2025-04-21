@@ -1,10 +1,12 @@
 # Vibe Sorcerer 🎼🔮  
 **Summoning the perfect song for your mood, every time.**
 
-Vibe Sorcerer is a mood-based playlist generator designed to create seamless, emotionally cohesive playlists. The core idea is simple: a great playlist isn’t just a random collection of songs—it’s a journey. By ensuring smooth transitions between tracks and maintaining a consistent emotional vibe, Vibe Sorcerer crafts playlists that feel intentional and immersive.
+## Overview (10%) [300 Words]
+*Vibe Sorcerer* is a mood-based playlist generator designed to create emotionally cohesive listening experiences. Rather than compiling a random selection of tracks, it curates playlists that feel intentional and immersive—each song smoothly transitioning into the next to maintain a consistent emotional arc. The core hypothesis is that a great playlist mirrors an emotional journey, and cohesion can be achieved by ensuring continuity in the emotional states evoked by each track.
 
-## How It Works  
-The magic behind Vibe Sorcerer lies in its iterative song selection process. Instead of throwing together a bunch of songs, the tool generates the next song based on the previous one, ensuring a natural flow. This approach allows the playlist to evolve organically, creating a harmonious listening experience.
+The system generates playlists iteratively. Starting with a single input song, it identifies its emotional qualities using [MTG Listening Models](https://github.com/MTG/essentia). It then generates a descriptive caption reflecting the song’s mood using a grammar-based system. This caption serves as input for Riffusion, a music generation model, which creates the next song in the sequence. This process repeats until the desired playlist length is reached, ensuring each transition is emotionally logical and musically fluid.
+
+The motivation behind Vibe Sorcerer stems from a lifelong passion for music. Listening has always been a way for me to clear my mind, process emotions, and stay present. I believe music is one of the most powerful tools for emotional awareness and expression. This project is a personal exploration of how technology can amplify the emotional power of music—and how generative systems can be used not just to create sound, but to shape feeling. In the future, this idea of playlist generation could support therapeutic practices by guiding listeners through carefully curated emotional states.
 
 ## Key Features  
 - **Mood-Based Playlists**: Generate playlists tailored to your current emotional state.  
