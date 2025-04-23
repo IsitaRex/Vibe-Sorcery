@@ -17,34 +17,15 @@ class Captioner:
         Initializes the grammar templates used for generating captions.
         """
         return [
-            # Simple patterns
-            ["This is a", "{mood}", "song"],
+            ["A", "{mood}", "song"],
             ["A", "{mood}", "tune for your", "{mood}", "moments"],
-            ["Feeling", "{mood}", "? This track captures that vibe"],
             ["The perfect", "{mood}", "soundtrack for your day"],
-
-            # Comparative patterns
-            ["Like", "{mood}", "meets", "{mood}", "in this melodic journey"],
-            ["A blend of", "{mood}", "and", "{mood}", "vibes"],
-            ["More", "{mood}", "than a", "{mood}", "sunset"],
+            ["A song that blends", "{mood}", "and", "{mood}", "vibes"],
             ["A", "{mood}", "song with hints of", "{mood}", "undertones"],
-            
-            # Descriptive patterns
             ["A", "{mood}", "composition with", "{mood}", "undertones"],
-            ["Full of", "{mood}", "energy and", "{mood}", "harmonies"],
-            ["A", "{mood}", "soundscape that feels", "{mood}"],
             ["Intricate", "{mood}", "textures layered with", "{mood}", "elements"],
-
-            # Emotional patterns
-            ["When you need something", "{mood}", "and", "{mood}"],
-            ["For those", "{mood}", "nights and", "{mood}", "days"],
             ["Music to feel", "{mood}", "and", "{mood}"],
-            ["A", "{mood}", "journey through", "{mood}", "emotions"],
-            
-            # Atmospheric patterns
-            ["A", "{mood}", "atmosphere with", "{mood}", "progressions"],
-            ["Close your eyes and feel the", "{mood}", "waves of sound"],
-            ["Transport yourself to a", "{mood}", "dimension"],
+            ["A song that evoques a", "{mood}", "atmosphere with", "{mood}", "progressions"],
             ["This track creates a", "{mood}", "ambiance that feels", "{mood}"]
         ]
     
