@@ -1,6 +1,6 @@
 import numpy as np
 import librosa
-from utils import mood_tags
+from src.utils import mood_tags
 from essentia.standard import MonoLoader, TensorflowPredictEffnetDiscogs, TensorflowPredictVGGish,TensorflowPredict2D
 
 # Load the audio file
@@ -24,14 +24,17 @@ embeddings_model_av = TensorflowPredictVGGish(
    )
 
 av_classification_model = TensorflowPredict2D(
-   graphFilename="models/deam-audioset-vggish-1.pb", 
+   graphFilename="models/deam-audioset-vggish-2.pb", 
    output="model/Identity"
   )
-def get_arousal_valence_dict(wav_filepath):
+
+def get_arousal_valence(wav_filepath):
   audio = MonoLoader(filename=wav_filepath, sampleRate=16000, resampleQuality=4)()
   embeddings = embeddings_model_av(audio)
   predictions = av_classification_model(embeddings)
-  breakpoint()
+  arousal, valence = np.mean(predictions, axis = 0)
+  return arousal, valence
+
 
 def get_mood_activations_dict(wav_filepath):
   audio = MonoLoader(filename=wav_filepath, sampleRate=32000)()
@@ -72,4 +75,6 @@ mood_dict = get_mood_activations_dict(audio_path)
 top_moods = get_moods(mood_dict, threshold=0.06)
 print("Top moods:", top_moods)
 
-get_arousal_valence_dict(audio_path)
+arousal, valence = get_arousal_valence(audio_path)
+print("Valence:", valence)
+print("Arousal:", arousal)
