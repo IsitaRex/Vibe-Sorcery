@@ -23,28 +23,16 @@ pip install -r requirements.txt
 
 ### 3. Download Pre-trained Models
 Download the necessary pre-trained models and save them in a folder named `Models`. Use the following commands:
-Download the pre-trained models and save them inside a folder called 
- ```bash
-mkdir -p Models && cd Models
-```
- ```
-wget https://essentia.upf.edu/models/music-style-classification/discogs-effnet/discogs-effnet-bs64-1.pb
- ```
-  ```
-wget https://essentia.upf.edu/models/classification-heads/mtg_jamendo_moodtheme/mtg_jamendo_moodtheme-discogs-effnet-1.pb
- ```
-  ```
-wget https://essentia.upf.edu/models/classification-heads/deam/deam-audioset-vggish-2.pb
- ```
-  ```
-wget https://essentia.upf.edu/models/feature-extractors/vggish/audioset-vggish-3.pb
- ```
-Once the setup is complete, you're ready to generate mood-based playlists with Vibe Sorcery! 🎼🔮
 
  ```bash
 mkdir -p Models && cd Models
+ ```
+Download the pre-trained models and save them inside a folder called 
+  ```bash
 wget https://essentia.upf.edu/models/music-style-classification/discogs-effnet/discogs-effnet-bs64-1.pb
 wget https://essentia.upf.edu/models/classification-heads/mtg_jamendo_moodtheme/mtg_jamendo_moodtheme-discogs-effnet-1.pb
 wget https://essentia.upf.edu/models/classification-heads/deam/deam-audioset-vggish-2.pb
 wget https://essentia.upf.edu/models/feature-extractors/vggish/audioset-vggish-3.pb
  ```
+
+Once the setup is complete, you're ready to generate mood-based playlists with Vibe Sorcery! 🎼🔮
