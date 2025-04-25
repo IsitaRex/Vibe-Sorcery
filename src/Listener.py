@@ -46,9 +46,9 @@ class Listener:
 
         # Filter moods based on the threshold
         moods_above_threshold = [mood for mood, value in activations_dict.items() if value > threshold]
-        if not moods_above_threshold:
+        if len(moods_above_threshold)  < 4:
             # If no moods are above the threshold, return the top k moods
             sorted_moods = sorted(activations_dict.items(), key=lambda item: item[1], reverse=True)
-            return [mood for mood, _ in sorted_moods[:5]]
+            return [mood for mood, _ in sorted_moods[:4]]
 
         return moods_above_threshold
