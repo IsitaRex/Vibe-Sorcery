@@ -176,7 +176,33 @@ class Evaluator:
         cmap = plt.get_cmap('viridis')
         
         songs = playlist_data["songs"]
-        breakpoint()
+        
+        # # Set the limits of the plot to the arousal-valence range [0,1]
+        ax.set_xlim(1, 9)
+        ax.set_ylim(1, 9)
+        
+        # Draw quadrant lines
+        ax.axhline(y=5.0, color='gray', linestyle='-', alpha=0.3)
+        ax.axvline(x=5.0, color='gray', linestyle='-', alpha=0.3)
+        
+        # Add quadrant labels
+        # Add quadrant labels
+        ax.text(3, 8, "Low Valence\nHigh Arousal", ha='center', fontsize=10, alpha=0.7)
+        ax.text(7, 8, "High Valence\nHigh Arousal", ha='center', fontsize=10, alpha=0.7)
+        ax.text(3, 2, "Low Valence\nLow Arousal", ha='center', fontsize=10, alpha=0.7)
+        ax.text(7, 2, "High Valence\nLow Arousal", ha='center', fontsize=10, alpha=0.7)
+        
+        # Add labels and title
+        ax.set_xlabel('Valence', fontsize=12)
+        ax.set_ylabel('Arousal', fontsize=12)
+        ax.set_title(title, fontsize=14)
+        
+        # Add a color bar to show the progression
+        sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(0, len(songs)-1))
+        sm.set_array([])  # trick to satisfy the ScalarMappable
+        cbar = plt.colorbar(sm, ax=ax)
+        cbar.set_label('Song Sequence')
+
         # Plot each song
         for i, song in enumerate(songs):
             color_val = i / max(1, len(songs) - 1)  # Normalize to [0, 1]
@@ -198,6 +224,7 @@ class Evaluator:
         # Plot the trajectory line
         if len(songs) > 1:
             points = [(song["valence"], song["arousal"]) for song in songs]
+            breakpoint()
             
             # Draw arrows connecting consecutive points to show direction
             for i in range(len(points) - 1):
@@ -218,30 +245,6 @@ class Evaluator:
                         linestyle='--', color='gray', alpha=0.4)
         ax.add_patch(circle)
         
-        # Set the limits of the plot to the arousal-valence range [0,1]
-        ax.set_xlim(-0.05, 1.05)
-        ax.set_ylim(-0.05, 1.05)
-        
-        # Draw quadrant lines
-        ax.axhline(y=0.5, color='gray', linestyle='-', alpha=0.3)
-        ax.axvline(x=0.5, color='gray', linestyle='-', alpha=0.3)
-        
-        # Add quadrant labels
-        ax.text(0.25, 0.9, "Low Valence\nHigh Arousal", ha='center', fontsize=10, alpha=0.7)
-        ax.text(0.75, 0.9, "High Valence\nHigh Arousal", ha='center', fontsize=10, alpha=0.7)
-        ax.text(0.25, 0.1, "Low Valence\nLow Arousal", ha='center', fontsize=10, alpha=0.7)
-        ax.text(0.75, 0.1, "High Valence\nLow Arousal", ha='center', fontsize=10, alpha=0.7)
-        
-        # Add labels and title
-        ax.set_xlabel('Valence', fontsize=12)
-        ax.set_ylabel('Arousal', fontsize=12)
-        ax.set_title(title, fontsize=14)
-        
-        # Add a color bar to show the progression
-        sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(0, len(songs)-1))
-        sm.set_array([])  # trick to satisfy the ScalarMappable
-        cbar = plt.colorbar(sm, ax=ax)
-        cbar.set_label('Song Sequence')
         
         # Add a legend
         ax.legend(loc='upper right')
@@ -342,104 +345,3 @@ class Evaluator:
             "scores": {k: round(v, 2) for k, v in scores.items()},
             "recommendations": recommendations
         }
-
-    def generate_report(self, playlist_dir: str, output_dir: str = "reports") -> str:
-        """
-        Generate a comprehensive report about a playlist's emotional coherence.
-        
-        Args:
-            playlist_dir (str): Directory containing the audio files.
-            output_dir (str): Directory to save the report and plot files.
-            
-        Returns:
-            str: Path to the generated report file.
-        """
-        # Create output directory if it doesn't exist
-        os.makedirs(output_dir, exist_ok=True)
-        
-        # Generate a basename from the playlist directory name
-        playlist_name = os.path.basename(os.path.normpath(playlist_dir))
-        base_filename = f"{playlist_name}_analysis"
-        
-        # Analyze the playlist
-        playlist_data = self.analyze_playlist(playlist_dir)
-        
-        # Generate evaluation
-        evaluation = self.evaluate_playlist_quality(playlist_data)
-        
-        # Generate and save the plot
-        plot_path = os.path.join(output_dir, f"{base_filename}_plot.png")
-        self.plot_arousal_valence_plane(playlist_data, output_path=plot_path, 
-                                       title=f"Arousal-Valence Analysis: {playlist_name}")
-        
-        # Generate a detailed report
-        report_path = os.path.join(output_dir, f"{base_filename}_report.txt")
-        with open(report_path, 'w') as f:
-            # Header
-            f.write(f"Emotional Coherence Analysis Report: {playlist_name}\n")
-            f.write("="*50 + "\n\n")
-            
-            # Songs information
-            f.write("Songs in analysis:\n")
-            f.write("-"*30 + "\n")
-            for i, song in enumerate(playlist_data["songs"]):
-                f.write(f"{i+1}. {song['filename']}\n")
-                f.write(f"   Arousal: {song['arousal']:.3f}, Valence: {song['valence']:.3f}\n")
-            f.write("\n")
-            
-            # Metrics
-            f.write("Calculated Metrics:\n")
-            f.write("-"*30 + "\n")
-            metrics = playlist_data["metrics"]
-            f.write(f"Average Consecutive Distance: {metrics['avg_consecutive_distance']:.4f}\n")
-            f.write(f"Maximum Consecutive Distance: {metrics['max_consecutive_distance']:.4f}\n")
-            f.write(f"Average Center Position: ({metrics['avg_arousal']:.4f}, {metrics['avg_valence']:.4f})\n")
-            f.write(f"Average Distance from Center: {metrics['avg_center_distance']:.4f}\n")
-            f.write(f"Total Traverse Distance: {metrics['total_traverse_distance']:.4f}\n")
-            f.write(f"Arousal Variance: {metrics['arousal_variance']:.4f}\n")
-            f.write(f"Valence Variance: {metrics['valence_variance']:.4f}\n")
-            f.write("\n")
-            
-            # Detailed transitions
-            f.write("Song Transitions:\n")
-            f.write("-"*30 + "\n")
-            songs = playlist_data["songs"]
-            if len(songs) > 1:
-                for i in range(len(songs)-1):
-                    song1 = songs[i]['filename']
-                    song2 = songs[i+1]['filename']
-                    distance = metrics['consecutive_distances'][i]
-                    f.write(f"Transition {i+1}->{i+2}: {song1} -> {song2}\n")
-                    f.write(f"   Distance: {distance:.4f}\n")
-                    if distance > 0.3:
-                        f.write(f"   Note: This transition is relatively abrupt\n")
-                    elif distance < 0.1:
-                        f.write(f"   Note: This transition is very smooth\n")
-            f.write("\n")
-            
-            # Evaluation scores
-            f.write("Quality Scores (0-10 scale):\n")
-            f.write("-"*30 + "\n")
-            for category, score in evaluation["scores"].items():
-                f.write(f"{category.capitalize()}: {score:.2f}/10\n")
-            f.write("\n")
-            
-            # Recommendations
-            f.write("Recommendations:\n")
-            f.write("-"*30 + "\n")
-            if evaluation["recommendations"]:
-                for i, rec in enumerate(evaluation["recommendations"], 1):
-                    f.write(f"{i}. {rec}\n")
-            else:
-                f.write("No specific recommendations - the playlist has good emotional coherence.\n")
-            f.write("\n")
-            
-            # Reference to the plot
-            f.write(f"Visual analysis is available at: {os.path.basename(plot_path)}\n\n")
-            
-            # Footer
-            f.write("="*50 + "\n")
-            f.write("Analysis generated by Vibe Sorcerer Evaluator\n")
-            
-        print(f"Analysis report generated at: {report_path}")
-        return report_path
