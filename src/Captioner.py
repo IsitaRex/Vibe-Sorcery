@@ -50,15 +50,11 @@ class Captioner:
         Returns:
             Tuple[List[str], List[str]]: (primary_moods, secondary_moods)
         """
-        # Shuffle the moods to ensure randomness
-        shuffled_moods = moods.copy()
-        random.shuffle(shuffled_moods)
-        
         # Determine split point (at least 1 mood for each subset)
-        split_point = random.randint(1, len(shuffled_moods) - 1)
+        split_point = random.randint(1, len(moods) - 1)
         
-        primary_moods = shuffled_moods[:split_point]
-        secondary_moods = shuffled_moods[split_point:]
+        primary_moods = moods[:split_point]
+        secondary_moods = moods[split_point:]
 
         # Take a random sample of moods for both primary and secondary
         primary_moods = random.sample(primary_moods, k=random.randint(1, len(primary_moods)))

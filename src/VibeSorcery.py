@@ -8,7 +8,7 @@ from src.Captioner import Captioner
 from src.Generator import Generator
 from pathlib import Path
 
-class VibeSorcerer:
+class VibeSorcery:
     """
     Class to generate a playlist of songs based on the mood of an input song.
     1. Detects the mood of an input song using the Listener component. (Listener)
@@ -22,7 +22,7 @@ class VibeSorcerer:
                  output_dir: str = "playlist", 
                  device: str = None):
         """
-        Initializes the VibeSorcerer with the specified directories and device.
+        Initializes the VibeSorcery with the specified directories and device.
         
         Args:
             models_dir (str): Directory where the models are stored.
