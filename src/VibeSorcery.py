@@ -8,6 +8,13 @@ from src.Captioner import Captioner
 from src.Generator import Generator
 from pathlib import Path
 
+import os
+import time
+import librosa
+import numpy as np
+from typing import List, Dict, Tuple, Optional, Union
+from pathlib import Path
+
 class VibeSorcery:
     """
     Class to generate a playlist of songs based on the mood of an input song.
@@ -22,7 +29,7 @@ class VibeSorcery:
                  output_dir: str = "playlist", 
                  device: str = None):
         """
-        Initializes the VibeSorcery with the specified directories and device.
+        Initializes the VibeSorcerer with the specified directories and device.
         
         Args:
             models_dir (str): Directory where the models are stored.
@@ -62,32 +69,22 @@ class VibeSorcery:
         """
         # Step 1: Detect the mood of the input song
         moods = self.listener.get_moods_from_song(input_song_path)
-        primary_mood = moods[0] if moods else "calm"
-        secondary_mood = moods[1] if len(moods) > 1 else None
         
-        # Step 2: Generate a caption based on the detected mood
-        caption = self.captioner.generate_caption(primary_mood, secondary_mood)
+        # Step 2: Generate a caption based on the detected moods
+        caption = self.captioner.generate_from_moods(moods)
         
         # Step 3: Generate the song using the generator
-        clean_name = caption.lower().replace(" ", "_")[:20]
-        output_filename = f"{clean_name}_{int(time.time())}.wav"
-        
-        self.generator.generate_song(
+        file_path = self.generator.generate_song(
             prompt=caption,
             duration=duration,
-            seed=seed,
-            filename=output_filename
+            seed=seed
         )
-        
-        output_path = os.path.join(self.output_dir, output_filename)
         
         # Save the song information
         song_info = {
-            "file_path": output_path,
+            "file_path": file_path,
             "caption": caption,
             "moods": moods,
-            "primary_mood": primary_mood,
-            "secondary_mood": secondary_mood,
             "duration": duration
         }
         
