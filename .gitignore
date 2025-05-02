@@ -1,3 +1,4 @@
 models/
 __pycache__/
 playlist/
+.DS_Store
