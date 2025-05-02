@@ -7,6 +7,7 @@ The system generates playlists iteratively. Starting with a single input song, i
 
 The motivation behind Vibe Sorcerer stems from a lifelong passion for music. Listening has always been a way for me to clear my mind, process emotions, and stay present. I believe music is one of the most powerful tools for emotional awareness and expression. This project is a personal exploration of how technology can amplify the emotional power of music—and how generative systems can be used not just to create sound, but to shape feeling. In the future, this idea of playlist generation could support therapeutic practices by guiding listeners through carefully curated emotional states. Moreover, using generated songs helps ensure that the emotional response they evoke is not influenced by cultural or contextual associations tied to commercial music, allowing for a clearer and more controlled induction of specific emotional states.
 
+An interactive guide through VibeSorcery can be found in Google Colab: [Abrir en Colab](https://colab.research.google.com/drive/1g8kJLwaHhzZRGM3NB0vGY29_AbdAK5_x?usp=sharing)
 
 ## Getting Started with *Vibe Sorcery*
 
@@ -89,4 +90,28 @@ The first stage of playlist generation involves analyzing an input song to detec
 Once the moods are detected, the system generates a textual caption for the song using grammar-based templates. This caption serves as a prompt for the next stage: music generation.
 
 ### [Stable Audio Open 1.0](https://huggingface.co/stabilityai/stable-audio-open-1.0)
-For audio generation, we employ Stable Audio Open 1.0, which creates up to 47-second stereo samples at 44.1kHz from text prompts. The model architecture includes an audio autoencoder (to compress waveforms into a latent space), a T5-based text encoder (to embed the prompts), and a transformer-based diffusion model (DiT) that operates within the latent space. Trained on large-scale audio-text pairs, Stable Audio produces high-fidelity, prompt-coherent music suitable for creative playlist expansion.
+For audio generation, Stable Audio Open 1.0 is used, which creates up to 47-second stereo samples at 44.1kHz from text prompts. The model architecture includes an audio autoencoder (to compress waveforms into a latent space), a T5-based text encoder (to embed the prompts), and a transformer-based diffusion model (DiT) that operates within the latent space. Trained on audio-text pairs, consisting of 486492 audio recordings, where 472618 are from Freesound and 13874 are from the Free Music Archive (FMA). This data was used to train our autoencoder and DiT and used a publicly available pre-trained T5 model.
+
+### [VGG pre-trained on DEAM dataset](https://essentia.upf.edu/models.html#arousal-valence-deam)
+Playlists are evaluated by mapping songs in the arousal-valence plane. Coordinates are derived using MTG listening models, specifically a VGG model pre-trained on the DEAM dataset, which outputs arousal and valence values in the range [1, 9].
+
+# Example Outputs 💿
+
+| Input Song                  | Link to Playlist               |
+|-----------------------------|--------------------------------|
+| Breathing - Ben Böhmer      | [Playlist Breathing 🚀](https://drive.google.com/drive/folders/1RwQ_kiHausN167qqiOSivtobZJ2el9fx?usp=sharing)           |
+| Little Monster - Royal Blood| [Playlist Little Monster 👾](https://drive.google.com/drive/folders/18CBIvSUZiUtitfc4HXYHvRU1G9-QMUY1?usp=sharing)      |
+| Psychosocial - Slipknot     | [Playlist Psychosocial 👽](https://drive.google.com/drive/folders/1QucwrYmalB8VHqLnpkzl1nIbloJtWeCl?usp=sharing)        |
+| Eclipse - João Gilberto     | [Playlist Eclipse 🌑](https://drive.google.com/drive/folders/1-CEAv7NSxBwkxxOHFPXTQXkshSoi3ch2?usp=sharing)             |
+| Colombia Tierra Querida     | [Playlist Colombia Tierra Querida 🌑](https://drive.google.com/drive/folders/1jAB3JIaqEyCoTWsiGVmiNMPM8Q2A1sKJ?usp=sharing) |
+
+# Evaluation 
+To analyze and visualize songs from an emotional perspective, the Arousal-Valence plane is employed, a two-dimensional model where valence (ranging from negative to positive) represents the pleasantness of a musical experience, while arousal (ranging from calm to excited) captures the intensity of the emotion evoked. This framework enables songs to be mapped within an emotional coordinate system.
+MTG’s listening models are used to predict arousal and valence values for each song. By plotting these values, songs can be visualized within this emotional latent space, and the trajectories created by Vib Sorcery’s playlist generation can be examined. This method provides both quantitative and qualitative insights into the emotional flow of the generated playlists. 
+
+For example:
+
+![Evaluation](docs/eval.png)
+
+The evaluator reveals that VibeSorcery generates playlists with smooth emotional transitions, as evidenced by an average Euclidean distance of 0.76 between consecutive songs. This moderate spacing suggests coherent emotional progression while maintaining variety. The maximum distance between any song pair (1.77) remains relatively low, indicating no abrupt emotional jumps. When plotting the average position and dispersion, all generated songs (excluding the input seed) fall within a circular region defined by the average distance from the centroid. Across all generated playlists, consecutive songs maintain an average distance below 1 and never exceed 2 in the A-V plane, ensuring consistently smooth emotional transitions. 
+
