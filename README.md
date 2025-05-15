@@ -7,7 +7,7 @@ The system generates playlists iteratively. Starting with a single input song, i
 
 The motivation behind Vibe Sorcerer stems from a lifelong passion for music. Listening has always been a way for me to clear my mind, process emotions, and stay present. I believe music is one of the most powerful tools for emotional awareness and expression. This project is a personal exploration of how technology can amplify the emotional power of music—and how generative systems can be used not just to create sound, but to shape feeling. In the future, this idea of playlist generation could support therapeutic practices by guiding listeners through carefully curated emotional states. Moreover, using generated songs helps ensure that the emotional response they evoke is not influenced by cultural or contextual associations tied to commercial music, allowing for a clearer and more controlled induction of specific emotional states.
 
-An interactive guide through VibeSorcery can be found in Google Colab: [Abrir en Colab](https://colab.research.google.com/drive/1g8kJLwaHhzZRGM3NB0vGY29_AbdAK5_x?usp=sharing)
+An interactive guide through VibeSorcery can be found in Google Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1g8kJLwaHhzZRGM3NB0vGY29_AbdAK5_x?usp=sharing)
 
 ## Getting Started with *Vibe Sorcery*
 
