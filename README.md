@@ -111,6 +111,6 @@ MTG’s listening models are used to predict arousal and valence values for each
 
 For example:
 
-![Evaluation](docs/eval.png)
+![Evaluation](docs/evasl.png)
 The evaluation compares a Vibe Sorcery-generated playlist with a randomly generated playlist. The random playlist exhibits abrupt transitions (e.g., from low to high arousal/valence) with an average distance of 2.09 and a maximum of 3.03 in the AV space. In contrast, Vibe Sorcery produces smoother transitions, achieving significantly lower average (0.37) and maximum (0.77) distances. This demonstrates the system’s ability to maintain emotional coherence through mood-driven captioning. 
 
