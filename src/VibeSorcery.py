@@ -68,10 +68,10 @@ class VibeSorcery:
             Dict: Information about the generated song, including file path, caption, and moods
         """
         # Step 1: Detect the mood of the input song
-        moods = self.listener.get_moods_from_song(input_song_path)
+        moods, genres = self.listener.get_moods_and_genres(input_song_path)
         
         # Step 2: Generate a caption based on the detected moods
-        caption = self.captioner.generate_from_moods(moods)
+        caption = self.captioner.generate_caption(genres, moods)
         
         # Step 3: Generate the song using the generator
         file_path = self.generator.generate_song(

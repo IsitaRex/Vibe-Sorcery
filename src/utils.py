@@ -12,6 +12,19 @@ mood_tags = [
   "summer", "trailer", "travel", "upbeat", "uplifting"
 ]
 
+genre_tags = [
+    "60s", "70s", "80s", "90s", "acidjazz", "alternative", "alternativerock", "ambient", "atmospheric", "blues", 
+    "bluesrock", "bossanova", "breakbeat", "celtic", "chanson", "chillout", "choir", "classical", "classicrock", 
+    "club", "contemporary", "country", "dance", "darkambient", "darkwave", "deephouse", "disco", "downtempo", 
+    "drumnbass", "dub", "dubstep", "easylistening", "edm", "electronic", "electronica", "electropop", "ethno", 
+    "eurodance", "experimental", "folk", "funk", "fusion", "groove", "grunge", "hard", "hardrock", "hiphop", 
+    "house", "idm", "improvisation", "indie", "industrial", "instrumentalpop", "instrumentalrock", "jazz", 
+    "jazzfusion", "latin", "lounge", "medieval", "metal", "minimal", "newage", "newwave", "orchestral", "pop", 
+    "popfolk", "poprock", "postrock", "progressive", "psychedelic", "punkrock", "rap", "reggae", "rnb", "rock", 
+    "rocknroll", "singersongwriter", "soul", "soundtrack", "swing", "symphonic", "synthpop", "techno", "trance", 
+    "triphop", "world", "worldfusion"
+]
+
 mood_synonyms = {
             "action": ["intense", "thrilling", "dynamic", "explosive", "pumping"],
             "adventure": ["exploratory", "journey", "quest", "expedition", "voyage"],
