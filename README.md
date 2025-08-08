@@ -92,8 +92,8 @@ Once the moods are detected, the system generates a textual caption for the song
 ### [Stable Audio Open 1.0](https://huggingface.co/stabilityai/stable-audio-open-1.0)
 For audio generation, Stable Audio Open 1.0 is used, which creates up to 47-second stereo samples at 44.1kHz from text prompts. The model architecture includes an audio autoencoder (to compress waveforms into a latent space), a T5-based text encoder (to embed the prompts), and a transformer-based diffusion model (DiT) that operates within the latent space. Trained on audio-text pairs, consisting of 486492 audio recordings, where 472618 are from Freesound and 13874 are from the Free Music Archive (FMA). This data was used to train our autoencoder and DiT and used a publicly available pre-trained T5 model.
 
-### [VGG pre-trained on DEAM dataset](https://essentia.upf.edu/models.html#arousal-valence-deam)
-Playlists are evaluated by mapping songs in the arousal-valence plane. Coordinates are derived using MTG listening models, specifically a VGG model pre-trained on the DEAM dataset, which outputs arousal and valence values in the range [1, 9].
+### [MusiCNN pre-trained on DEAM dataset](https://essentia.upf.edu/models.html#arousal-valence-deam)
+Playlists are evaluated by mapping songs in the arousal-valence plane. Coordinates are derived using MTG listening models, specifically a MusiCNN model pre-trained on the DEAM dataset, which outputs arousal and valence values in the range [1, 9].
 
 # Example Outputs 💿
 
@@ -112,6 +112,5 @@ MTG’s listening models are used to predict arousal and valence values for each
 For example:
 
 ![Evaluation](docs/eval.png)
-
-The evaluator reveals that VibeSorcery generates playlists with smooth emotional transitions, as evidenced by an average Euclidean distance of 0.76 between consecutive songs. This moderate spacing suggests coherent emotional progression while maintaining variety. The maximum distance between any song pair (1.77) remains relatively low, indicating no abrupt emotional jumps. When plotting the average position and dispersion, all generated songs (excluding the input seed) fall within a circular region defined by the average distance from the centroid. Across all generated playlists, consecutive songs maintain an average distance below 1 and never exceed 2 in the A-V plane, ensuring consistently smooth emotional transitions. 
+The evaluation compares a Vibe Sorcery-generated playlist with a randomly generated playlist. The random playlist exhibits abrupt transitions (e.g., from low to high arousal/valence) with an average distance of 2.09 and a maximum of 3.03 in the AV space. In contrast, Vibe Sorcery produces smoother transitions, achieving significantly lower average (0.37) and maximum (0.77) distances. This demonstrates the system’s ability to maintain emotional coherence through mood-driven captioning. 
 
