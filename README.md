@@ -1,9 +1,9 @@
 # Vibe Sorcery 🎼🔮  
 **Summoning the perfect song for your mood, every time.**
 
-*Vibe Sorcerer* is a mood-based playlist generator designed to create emotionally cohesive listening experiences. Rather than compiling a random selection of tracks, it curates playlists that feel intentional and immersive—each song smoothly transitioning into the next to maintain a consistent emotional arc. The core hypothesis is that a great playlist mirrors an emotional journey, and cohesion can be achieved by ensuring continuity in the emotional states evoked by each track.
+*Vibe Sorcery* is a mood-based playlist generator that leverages generative music to create emotionally cohesive listening experiences. Conventional playlist generator systems treat songs as clusters, selecting the next track based on shared patterns of the entire set such as the same artist, similar tempos or harmonic structures. This static perspective assumes that all songs in the playlist should feel similar to one another, prioritizing uniformity over progression. In contrast, we propose a system based on an alternative perspective: modeling playlist generation as a Markov process, where each subsequent song depends only on the preceding one. In our system, both the genre and the mood of the current track shape the selection of the next song, with mood progression taking precedence and relying solely on the immediately preceding track rather than the entire playlist history.
 
-The system generates playlists iteratively. Starting with a single input song, it identifies its emotional qualities using [MTG Listening Models](https://github.com/MTG/essentia). It then generates a descriptive caption reflecting the song’s mood using a grammar-based system. This caption serves as input for Riffusion, a music generation model, which creates the next song in the sequence. This process repeats until the desired playlist length is reached, ensuring each transition is emotionally logical and musically fluid.
+The core hypothesis is that an effective playlist mirrors an emotional journey, where coherence arises not from static similarity but from dynamic progression. While each transition between songs is determined locally, the overall sequence can still trace a path through widely different emotional states. These changes occur gradually, allowing the playlist to move, for instance, from somber and subdued moods to uplifting and energetic ones.
 
 The motivation behind Vibe Sorcerer stems from a lifelong passion for music. Listening has always been a way for me to clear my mind, process emotions, and stay present. I believe music is one of the most powerful tools for emotional awareness and expression. This project is a personal exploration of how technology can amplify the emotional power of music—and how generative systems can be used not just to create sound, but to shape feeling. In the future, this idea of playlist generation could support therapeutic practices by guiding listeners through carefully curated emotional states. Moreover, using generated songs helps ensure that the emotional response they evoke is not influenced by cultural or contextual associations tied to commercial music, allowing for a clearer and more controlled induction of specific emotional states.
 
@@ -30,13 +30,15 @@ mkdir -p Models && cd Models
  ```
 Download the pre-trained models and save them inside a folder called 
   ```bash
-wget https://essentia.upf.edu/models/music-style-classification/discogs-effnet/discogs-effnet-bs64-1.pb
-wget https://essentia.upf.edu/models/classification-heads/mtg_jamendo_moodtheme/mtg_jamendo_moodtheme-discogs-effnet-1.pb
-wget https://essentia.upf.edu/models/classification-heads/deam/deam-audioset-vggish-2.pb
-wget https://essentia.upf.edu/models/feature-extractors/vggish/audioset-vggish-3.pb
- ```
+# !wget https://essentia.upf.edu/models/music-style-classification/discogs-effnet/discogs-effnet-bs64-1.pb
+# !wget https://essentia.upf.edu/models/classification-heads/mtg_jamendo_moodtheme/mtg_jamendo_moodtheme-discogs-effnet-1.pb
+# !wget https://essentia.upf.edu/models/classification-heads/mtg_jamendo_genre/mtg_jamendo_genre-discogs-effnet-1.pb
+# !wget https://essentia.upf.edu/models/classification-heads/deam/deam-audioset-vggish-2.pb
+# !wget https://essentia.upf.edu/models/feature-extractors/vggish/audioset-vggish-3.pb
+# !wget https://essentia.upf.edu/models/feature-extractors/musicnn/msd-musicnn-1.pb
+# !wget https://essentia.upf.edu/models/classification-heads/deam/deam-audioset-musinn-2.pb
 
-Once the setup is complete, you're ready to generate mood-based playlists with Vibe Sorcery! 🎼🔮
+ ```
 
 ### 4. Create your Playlist
 
@@ -45,8 +47,6 @@ Create a folder called `playlist` (or any name you prefer) and upload a .wav son
   ```bash
   python main.py -o playlist -n 6 -d 47.0
    ```
-
-Voilà! Your mood-synchronized playlist is ready to be enjoyed. Prepare yourself for a musical journey where each song flows as if your own heart were the DJ. 🎵✨
 
 ## How does the magic in Vibe Sorcery work?  🪄
 ![Vibe Sorcery Pipeline](docs/pipeline.png)
