@@ -107,10 +107,9 @@ Playlists are evaluated by mapping songs in the arousal-valence plane. Coordinat
 
 # Evaluation 
 To analyze and visualize songs from an emotional perspective, the Arousal-Valence plane is employed, a two-dimensional model where valence (ranging from negative to positive) represents the pleasantness of a musical experience, while arousal (ranging from calm to excited) captures the intensity of the emotion evoked. This framework enables songs to be mapped within an emotional coordinate system.
-MTG’s listening models are used to predict arousal and valence values for each song. By plotting these values, songs can be visualized within this emotional latent space, and the trajectories created by Vib Sorcery’s playlist generation can be examined. This method provides both quantitative and qualitative insights into the emotional flow of the generated playlists. 
+MTG’s listening models are used to predict arousal and valence values for each song. By plotting these values, songs can be visualized within this emotional latent space, and the trajectories created by Vib Sorcery’s playlist generation can be examined. This method provides both quantitative and qualitative insights into the emotional flow of the generated playlists. For example:
 
-For example:
+<img width="794" height="416" alt="eval3 (1)" src="https://github.com/user-attachments/assets/b274e325-5338-49a8-8326-3d48afd2888c" />
 
-![Evaluation](docs/eval.png)
 The evaluation compares a Vibe Sorcery-generated playlist with a randomly generated playlist. The random playlist exhibits abrupt transitions (e.g., from low to high arousal/valence) with an average distance of 2.09 and a maximum of 3.03 in the AV space. In contrast, Vibe Sorcery produces smoother transitions, achieving significantly lower average (0.37) and maximum (0.77) distances. This demonstrates the system’s ability to maintain emotional coherence through mood-driven captioning. 
 
