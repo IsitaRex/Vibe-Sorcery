@@ -87,3 +87,19 @@ Using grammars instead of LLMs ensures consistency and control over the style of
   playlist_dict = vibe_sorcery.generate_playlist(input_song_path='playlist/playlist_song_0.wav', num_songs=6, duration=47.0)
   ```
 
+## 📚 Citation  
+
+If you use *Vibe Sorcery* in your research or projects, please cite our paper:  
+
+Urrego-Gómez, I., Colton, S., & Roman, I. R. (2025). *Vibe Sorcery: Integrating Emotion Recognition with Generative Music for Playlist Curation*. 1st Workshop on Large Language Models for Music & Audio (LLM4MA). [OpenReview](https://openreview.net/forum?id=RArmM7K0zI)  
+
+```bibtex
+@inproceedings{
+urrego-gomez2025vibe,
+title={Vibe Sorcery: Integrating Emotion Recognition with Generative Music for Playlist Curation},
+author={Isabel Urrego-G{\'o}mez and Simon Colton and Iran R Roman},
+booktitle={1st Workshop on Large Language Models for Music {\&} Audio (LLM4MA)},
+year={2025},
+url={https://openreview.net/forum?id=RArmM7K0zI}
+}
+
